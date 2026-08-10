@@ -1,0 +1,536 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Zaffa — Votre mariage, sans perdre de temps</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,400;0,700;1,400&family=Cairo:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --cream:#FBF3E5;
+    --cream-deep:#F3E4C8;
+    --terracotta:#C1440E;
+    --terracotta-deep:#9C3509;
+    --green:#0B6E4F;
+    --green-deep:#08543C;
+    --gold:#D4A017;
+    --indigo:#1B3A6B;
+    --wine:#7A1F3D;
+    --ink:#2A1B12;
+    --ink-soft:#5C4A3A;
+    --paper-line: rgba(42,27,18,0.12);
+  }
+
+  *{box-sizing:border-box; margin:0; padding:0;}
+
+  html{scroll-behavior:smooth;}
+
+  body{
+    background:var(--cream);
+    color:var(--ink);
+    font-family:'Cairo', sans-serif;
+    font-weight:400;
+    line-height:1.6;
+    overflow-x:hidden;
+  }
+
+  h1,h2,h3,.display{
+    font-family:'Amiri', serif;
+    font-weight:700;
+    color:var(--ink);
+    line-height:1.15;
+  }
+
+  a{color:inherit; text-decoration:none;}
+
+  img{max-width:100%; display:block;}
+
+  .wrap{
+    max-width:1180px;
+    margin:0 auto;
+    padding:0 28px;
+  }
+
+  /* zellige star pattern, drawn with SVG, used as watermark texture */
+  .zellige-bg{
+    position:absolute; inset:0;
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='84' height='84' viewBox='0 0 84 84'%3E%3Cg fill='none' stroke='%232A1B12' stroke-opacity='0.06' stroke-width='1.4'%3E%3Cpath d='M42 4 L58 22 L42 40 L26 22 Z'/%3E%3Cpath d='M42 44 L58 62 L42 80 L26 62 Z'/%3E%3Cpath d='M4 42 L22 26 L40 42 L22 58 Z'/%3E%3Cpath d='M44 42 L62 26 L80 42 L62 58 Z'/%3E%3Ccircle cx='42' cy='42' r='6'/%3E%3C/g%3E%3C/svg%3E");
+    background-size:84px 84px;
+    pointer-events:none;
+  }
+
+  /* ============ NAV ============ */
+  nav{
+    position:sticky; top:0; z-index:50;
+    background:rgba(251,243,229,0.92);
+    backdrop-filter:blur(6px);
+    border-bottom:1px solid var(--paper-line);
+  }
+  nav .wrap{
+    display:flex; align-items:center; justify-content:space-between;
+    height:76px;
+  }
+  .logo{
+    font-family:'Amiri', serif;
+    font-weight:700;
+    font-size:1.6rem;
+    color:var(--terracotta-deep);
+    letter-spacing:0.5px;
+  }
+  .logo span{color:var(--green-deep);}
+  .nav-links{display:flex; gap:36px; font-size:0.95rem; font-weight:600;}
+  .nav-links a{opacity:0.8; transition:opacity .2s;}
+  .nav-links a:hover{opacity:1; color:var(--terracotta-deep);}
+  .nav-cta{
+    background:var(--terracotta);
+    color:var(--cream);
+    padding:10px 22px;
+    border-radius:999px;
+    font-weight:700;
+    font-size:0.9rem;
+    box-shadow:0 3px 0 var(--terracotta-deep);
+  }
+  @media(max-width:820px){ .nav-links{display:none;} }
+
+  /* ============ HERO ============ */
+  header.hero{
+    position:relative;
+    padding:96px 0 40px;
+    overflow:hidden;
+  }
+  .hero-inner{
+    position:relative; z-index:2;
+    display:grid;
+    grid-template-columns:1.1fr 0.9fr;
+    gap:56px;
+    align-items:center;
+  }
+  .eyebrow{
+    display:inline-flex; align-items:center; gap:10px;
+    color:var(--green-deep);
+    font-weight:700;
+    font-size:0.85rem;
+    letter-spacing:1.5px;
+    text-transform:uppercase;
+    margin-bottom:22px;
+  }
+  .eyebrow::before{
+    content:"";
+    width:26px; height:2px;
+    background:var(--gold);
+  }
+  h1.hero-title{
+    font-size:clamp(2.4rem, 4.6vw, 3.6rem);
+    margin-bottom:22px;
+  }
+  h1.hero-title em{
+    font-style:italic;
+    color:var(--terracotta);
+    position:relative;
+  }
+  .hero p.lead{
+    font-size:1.15rem;
+    color:var(--ink-soft);
+    max-width:480px;
+    margin-bottom:34px;
+  }
+  .hero-actions{display:flex; gap:16px; flex-wrap:wrap;}
+  .btn-primary{
+    background:var(--terracotta);
+    color:var(--cream);
+    padding:15px 30px;
+    border-radius:999px;
+    font-weight:700;
+    box-shadow:0 4px 0 var(--terracotta-deep);
+    transition:transform .15s;
+    display:inline-block;
+  }
+  .btn-primary:hover{transform:translateY(-2px);}
+  .btn-secondary{
+    border:2px solid var(--ink);
+    padding:13px 28px;
+    border-radius:999px;
+    font-weight:700;
+    transition:background .15s, color .15s;
+  }
+  .btn-secondary:hover{background:var(--ink); color:var(--cream);}
+
+  /* moorish arch visual */
+  .arch-frame{
+    position:relative;
+    width:100%;
+    aspect-ratio:3/4;
+    background:linear-gradient(160deg, var(--wine) 0%, var(--terracotta-deep) 55%, var(--gold) 100%);
+    border-radius:50% 50% 14px 14px / 60% 60% 14px 14px;
+    box-shadow:0 24px 50px -18px rgba(122,31,61,0.5);
+    display:flex; align-items:flex-end; justify-content:center;
+    padding:0 0 34px;
+    overflow:hidden;
+  }
+  .arch-frame::before{
+    content:"";
+    position:absolute; inset:14px;
+    border:2px solid rgba(251,243,229,0.55);
+    border-radius:50% 50% 6px 6px / 60% 60% 6px 6px;
+  }
+  .arch-content{
+    position:relative; z-index:2;
+    background:rgba(42,27,18,0.35);
+    backdrop-filter:blur(3px);
+    padding:16px 24px;
+    border-radius:14px;
+    text-align:center;
+    color:var(--cream);
+  }
+  .arch-content .big-num{
+    font-family:'Amiri', serif;
+    font-size:2.6rem;
+    font-weight:700;
+    line-height:1;
+  }
+  .arch-content .cap{font-size:0.85rem; opacity:0.9;}
+
+  @media(max-width:900px){
+    .hero-inner{grid-template-columns:1fr;}
+    .arch-frame{max-width:340px; margin:0 auto;}
+  }
+
+  /* ============ TRUST STRIP ============ */
+  .trust-strip{
+    border-top:1px solid var(--paper-line);
+    border-bottom:1px solid var(--paper-line);
+    padding:22px 0;
+  }
+  .trust-strip .wrap{
+    display:flex; justify-content:space-between; flex-wrap:wrap; gap:18px;
+    font-size:0.88rem; font-weight:600; color:var(--ink-soft);
+  }
+  .trust-strip strong{color:var(--ink); font-family:'Amiri',serif; font-size:1.1rem;}
+
+  /* ============ SECTION HEADERS ============ */
+  section{padding:88px 0; position:relative;}
+  .section-head{max-width:640px; margin-bottom:52px;}
+  .section-head .eyebrow{margin-bottom:14px;}
+  .section-head h2{font-size:clamp(1.8rem, 3vw, 2.5rem);}
+  .section-head p{color:var(--ink-soft); font-size:1.05rem; margin-top:14px;}
+
+  /* ============ HOW IT WORKS ============ */
+  .steps{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:0;
+    border-top:1px solid var(--paper-line);
+  }
+  .step{
+    padding:34px 30px 34px 0;
+    border-right:1px solid var(--paper-line);
+  }
+  .step:last-child{border-right:none;}
+  .step .letter{
+    font-family:'Amiri',serif;
+    font-size:1rem;
+    color:var(--gold);
+    font-weight:700;
+    display:block;
+    margin-bottom:14px;
+  }
+  .step h3{font-size:1.25rem; margin-bottom:10px;}
+  .step p{color:var(--ink-soft); font-size:0.95rem;}
+  @media(max-width:760px){
+    .steps{grid-template-columns:1fr;}
+    .step{border-right:none; border-bottom:1px solid var(--paper-line); padding:28px 0;}
+  }
+
+  /* ============ CATEGORIES ============ */
+  .cat-section{background:var(--ink); color:var(--cream);}
+  .cat-section .section-head h2{color:var(--cream);}
+  .cat-section .section-head p{color:rgba(251,243,229,0.72);}
+  .cat-section .eyebrow{color:var(--gold);}
+  .cat-section .eyebrow::before{background:var(--gold);}
+
+  .cat-grid{
+    display:grid;
+    grid-template-columns:repeat(4, 1fr);
+    gap:20px;
+  }
+  @media(max-width:940px){ .cat-grid{grid-template-columns:repeat(2,1fr);} }
+  @media(max-width:520px){ .cat-grid{grid-template-columns:1fr;} }
+
+  .cat-card{
+    position:relative;
+    background:rgba(251,243,229,0.06);
+    border:1px solid rgba(251,243,229,0.14);
+    border-radius:120px 120px 10px 10px;
+    padding:44px 20px 26px;
+    text-align:center;
+    transition:transform .2s, background .2s, border-color .2s;
+  }
+  .cat-card:hover{
+    transform:translateY(-6px);
+    background:rgba(251,243,229,0.1);
+    border-color:var(--gold);
+  }
+  .cat-icon{
+    width:56px; height:56px;
+    margin:0 auto 18px;
+    border-radius:50%;
+    display:flex; align-items:center; justify-content:center;
+    font-size:1.5rem;
+    background:linear-gradient(135deg, var(--terracotta), var(--wine));
+  }
+  .cat-card h3{
+    font-family:'Cairo', sans-serif;
+    font-weight:700;
+    font-size:1.02rem;
+    color:var(--cream);
+    margin-bottom:6px;
+  }
+  .cat-card span.count{
+    font-size:0.8rem;
+    color:var(--gold);
+    font-weight:600;
+  }
+
+  /* ============ VENDOR CTA ============ */
+  .vendor-band{
+    background:linear-gradient(120deg, var(--green) 0%, var(--green-deep) 100%);
+    color:var(--cream);
+    border-radius:28px;
+    padding:56px 48px;
+    display:grid;
+    grid-template-columns:1.3fr 0.7fr;
+    gap:36px;
+    align-items:center;
+    position:relative;
+    overflow:hidden;
+  }
+  .vendor-band::after{
+    content:"";
+    position:absolute; inset:0;
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='84' height='84' viewBox='0 0 84 84'%3E%3Cg fill='none' stroke='%23FBF3E5' stroke-opacity='0.08' stroke-width='1.4'%3E%3Cpath d='M42 4 L58 22 L42 40 L26 22 Z'/%3E%3Cpath d='M42 44 L58 62 L42 80 L26 62 Z'/%3E%3Cpath d='M4 42 L22 26 L40 42 L22 58 Z'/%3E%3Cpath d='M44 42 L62 26 L80 42 L62 58 Z'/%3E%3Ccircle cx='42' cy='42' r='6'/%3E%3C/g%3E%3C/svg%3E");
+    background-size:84px 84px;
+  }
+  .vendor-band h2{color:var(--cream); font-size:clamp(1.6rem,2.6vw,2.2rem); position:relative; z-index:2;}
+  .vendor-band p{color:rgba(251,243,229,0.85); margin:16px 0 26px; max-width:460px; position:relative; z-index:2;}
+  .vendor-band .btn-primary{background:var(--gold); box-shadow:0 4px 0 #a97c0f; color:var(--ink); position:relative; z-index:2;}
+  .vendor-figure{
+    position:relative; z-index:2;
+    justify-self:center;
+    background:rgba(251,243,229,0.12);
+    border:1px solid rgba(251,243,229,0.3);
+    border-radius:100px 100px 12px 12px;
+    padding:30px 24px;
+    text-align:center;
+  }
+  .vendor-figure .big-num{font-family:'Amiri',serif; font-size:2.8rem; font-weight:700;}
+  .vendor-figure .cap{font-size:0.85rem; opacity:0.85;}
+  @media(max-width:820px){
+    .vendor-band{grid-template-columns:1fr; padding:40px 26px; text-align:center;}
+    .vendor-band p{margin-left:auto; margin-right:auto;}
+  }
+
+  /* ============ TESTIMONIAL / QUOTE ============ */
+  .quote-section{
+    text-align:center;
+    max-width:760px;
+    margin:0 auto;
+  }
+  .quote-section .mark{
+    font-family:'Amiri', serif;
+    font-size:3.2rem;
+    color:var(--gold);
+    line-height:1;
+    margin-bottom:10px;
+  }
+  .quote-section p.quote-text{
+    font-family:'Amiri', serif;
+    font-style:italic;
+    font-size:clamp(1.3rem,2.4vw,1.7rem);
+    color:var(--ink);
+    margin-bottom:22px;
+  }
+  .quote-section .attrib{font-weight:700; font-size:0.9rem; color:var(--ink-soft);}
+
+  /* ============ FOOTER CTA ============ */
+  .final-cta{
+    background:var(--cream-deep);
+    text-align:center;
+    padding:100px 0;
+    position:relative;
+  }
+  .final-cta h2{font-size:clamp(2rem,4vw,3rem); margin-bottom:18px;}
+  .final-cta p{color:var(--ink-soft); font-size:1.1rem; margin-bottom:34px;}
+
+  footer{
+    background:var(--ink);
+    color:rgba(251,243,229,0.6);
+    padding:44px 0 30px;
+    font-size:0.85rem;
+  }
+  footer .wrap{
+    display:flex; justify-content:space-between; flex-wrap:wrap; gap:18px;
+    border-bottom:1px solid rgba(251,243,229,0.12);
+    padding-bottom:26px; margin-bottom:20px;
+  }
+  footer .logo{color:var(--cream);}
+  footer .logo span{color:var(--gold);}
+  footer .foot-note{text-align:center; opacity:0.7;}
+
+  /* reveal on scroll */
+  .reveal{opacity:0; transform:translateY(18px); transition:opacity .6s ease, transform .6s ease;}
+  .reveal.in{opacity:1; transform:translateY(0);}
+
+  @media (prefers-reduced-motion: reduce){
+    .reveal{opacity:1; transform:none; transition:none;}
+    html{scroll-behavior:auto;}
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="wrap">
+    <div class="logo">Zaffa<span>.</span></div>
+    <div class="nav-links">
+      <a href="#comment">Comment ça marche</a>
+      <a href="#categories">Catégories</a>
+      <a href="#prestataires">Prestataires</a>
+    </div>
+    <a href="#final" class="nav-cta">Commencer</a>
+  </div>
+</nav>
+
+<header class="hero">
+  <div class="zellige-bg" style="height:120%;"></div>
+  <div class="wrap hero-inner">
+    <div>
+      <span class="eyebrow">La zaffa commence ici</span>
+      <h1 class="hero-title">Organisez votre mariage <em>sans courir</em> toute l'Algérie.</h1>
+      <p class="lead">Vêtements, bijoux, gâteaux, traiteur, salle des fêtes, henné, photographe, DJ — tous les meilleurs prestataires réunis sur une seule plateforme. Choisissez, comparez, réservez. Le reste, on s'en occupe.</p>
+      <div class="hero-actions">
+        <a href="#final" class="btn-primary">Découvrir les prestataires</a>
+        <a href="#comment" class="btn-secondary">Comment ça marche</a>
+      </div>
+    </div>
+    <div class="arch-frame">
+      <div class="arch-content">
+        <span class="big-num">9</span>
+        <div class="cap">catégories à explorer</div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<div class="trust-strip">
+  <div class="wrap">
+    <div><strong>+120</strong> boutiques partenaires (objectif lancement)</div>
+    <div><strong>9</strong> catégories de prestations</div>
+    <div><strong>1</strong> seule plateforme, zéro déplacement inutile</div>
+  </div>
+</div>
+
+<section id="comment">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <span class="eyebrow">Le principe</span>
+      <h2>Trois étapes, plus de stress</h2>
+      <p>Fini les journées entières à courir entre les boutiques. Zaffa rassemble les meilleurs prestataires de mariage d'Algérie au même endroit.</p>
+    </div>
+    <div class="steps">
+      <div class="step reveal">
+        <span class="letter">01</span>
+        <h3>Parcourez les catégories</h3>
+        <p>Vêtements traditionnels, bijoux, gâteaux, salle des fêtes, traiteur, henné, photographe, DJ, décoration — tout est classé et filtrable selon vos envies et votre budget.</p>
+      </div>
+      <div class="step reveal">
+        <span class="letter">02</span>
+        <h3>Choisissez vos favoris</h3>
+        <p>Comparez les boutiques partenaires, leurs photos, avis et tarifs. Enregistrez vos coups de cœur dans une seule liste, pour un mariage entièrement pensé par vous.</p>
+      </div>
+      <div class="step reveal">
+        <span class="letter">03</span>
+        <h3>Réservez en un message</h3>
+        <p>Contactez directement les boutiques sélectionnées depuis la plateforme, sans intermédiaire ni allers-retours téléphoniques interminables.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="cat-section" id="categories">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <span class="eyebrow">Explorez</span>
+      <h2>Neuf catégories, un seul mariage</h2>
+      <p>Chaque catégorie regroupe les meilleures adresses, notées et vérifiées par la communauté.</p>
+    </div>
+    <div class="cat-grid">
+      <div class="cat-card reveal"><div class="cat-icon">👗</div><h3>Vêtements traditionnels</h3><span class="count">Robes, caftans, tenues de cérémonie</span></div>
+      <div class="cat-card reveal"><div class="cat-icon">💍</div><h3>Bijoux</h3><span class="count">Parures, or, argent</span></div>
+      <div class="cat-card reveal"><div class="cat-icon">🎂</div><h3>Gâteaux &amp; pâtisserie</h3><span class="count">Pièce montée, gâteaux traditionnels</span></div>
+      <div class="cat-card reveal"><div class="cat-icon">🍽️</div><h3>Traiteur</h3><span class="count">Buffets, menus, service</span></div>
+      <div class="cat-card reveal"><div class="cat-icon">🏛️</div><h3>Salle des fêtes</h3><span class="count">Capacité, décor, disponibilités</span></div>
+      <div class="cat-card reveal"><div class="cat-icon">🌿</div><h3>Henné</h3><span class="count">Artistes et cérémonies</span></div>
+      <div class="cat-card reveal"><div class="cat-icon">📷</div><h3>Photographe &amp; vidéaste</h3><span class="count">Reportage, clips, albums</span></div>
+      <div class="cat-card reveal"><div class="cat-icon">🎶</div><h3>Musique &amp; DJ</h3><span class="count">Orchestre, DJ, sono</span></div>
+      <div class="cat-card reveal"><div class="cat-icon">💐</div><h3>Décoration &amp; fleurs</h3><span class="count">Arches, centres de table</span></div>
+    </div>
+  </div>
+</section>
+
+<section id="prestataires">
+  <div class="wrap">
+    <div class="vendor-band reveal">
+      <div>
+        <h2>Vous tenez une boutique ou un service de mariage ?</h2>
+        <p>Rejoignez Zaffa et présentez votre catalogue directement aux mariées de votre région, sans dépenser en publicité.</p>
+        <a href="#final" class="btn-primary">Devenir partenaire</a>
+      </div>
+      <div class="vendor-figure">
+        <div class="big-num">0€</div>
+        <div class="cap">commission de lancement</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap quote-section reveal">
+    <div class="mark">”</div>
+    <p class="quote-text">Le plus grand cadeau qu'on puisse faire à une future mariée, c'est du temps.</p>
+    <p class="attrib">— L'idée derrière Zaffa</p>
+  </div>
+</section>
+
+<section class="final-cta" id="final">
+  <div class="wrap">
+    <h2 class="reveal">Prête à organiser votre zaffa ?</h2>
+    <p class="reveal">Cette page est une démonstration du concept. La plateforme complète — avec comptes, réservation et paiement — arrive bientôt.</p>
+    <a href="#" class="btn-primary reveal">Être informée du lancement</a>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="logo">Zaffa<span>.</span></div>
+    <div>Vêtements · Bijoux · Gâteaux · Traiteur · Salle · Henné · Photo · DJ · Décoration</div>
+  </div>
+  <p class="foot-note">Maquette de démonstration — Zaffa, plateforme de prestataires de mariage en Algérie.</p>
+</footer>
+
+<script>
+  const revealEls = document.querySelectorAll('.reveal');
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if(e.isIntersecting){
+        e.target.classList.add('in');
+        io.unobserve(e.target);
+      }
+    });
+  }, {threshold:0.15});
+  revealEls.forEach(el => io.observe(el));
+</script>
+
+</body>
+</html>
