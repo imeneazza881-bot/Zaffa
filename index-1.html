@@ -1,0 +1,161 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light">
+<title>Zaffa — Tous les prestataires de votre mariage</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Jost:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{color-scheme:light;--rose:#fcf3f1;--rose2:#f5d7d5;--rose3:#d1a59f;--rose4:#b0807a;--silver:#e3d3c6;--silver2:#f4eae3;--ink:#4a3a3a;--mut:#8a7468;--gold:#c9a66b}
+*{box-sizing:border-box}html{scroll-behavior:smooth}
+body{margin:0;background:var(--rose);color:var(--ink);font-family:Jost,system-ui,sans-serif;line-height:1.55}
+h1,h2,h3{font-family:'Cormorant Garamond',Georgia,serif;font-weight:600;margin:0}
+.wrap{max-width:1000px;margin:0 auto;padding:0 20px;position:relative}
+.sv{background:linear-gradient(100deg,#a8854f,#e8cf98 45%,#a8854f);-webkit-background-clip:text;background-clip:text;color:transparent}
+nav{display:flex;justify-content:space-between;align-items:center;padding:16px 0}
+.logo{font-family:'Cormorant Garamond',serif;font-size:32px;font-weight:700;letter-spacing:.14em}
+.btn{display:inline-block;background:linear-gradient(135deg,#f5d7d5,#d9b0a9);color:#3d2a33;border:1px solid #fff;box-shadow:0 4px 14px rgba(176,128,122,.35);padding:13px 26px;border-radius:99px;font:500 15px Jost,sans-serif;cursor:pointer;text-decoration:none}
+.btn.alt{background:#fff;border:1px solid var(--silver);box-shadow:none;color:var(--ink)}
+.fb{position:absolute;pointer-events:none;filter:drop-shadow(0 6px 10px rgba(176,128,122,.28))}
+.garland{display:flex;justify-content:center;align-items:center;margin-top:4px}
+.gi{flex:none;filter:drop-shadow(0 4px 6px rgba(176,128,122,.3))}
+.fl{position:absolute;pointer-events:none;color:var(--rose3);opacity:.55}
+.hero{position:relative;overflow:hidden;text-align:center;padding:30px 0 100px;background:linear-gradient(180deg,rgba(252,243,241,.35),rgba(245,215,213,.8)),url(petale.jpg) 60% center/cover}
+.hero h1{font-size:clamp(38px,9vw,64px);line-height:1.08;margin:12px 0}
+.hero p{color:var(--mut);max-width:520px;margin:0 auto 24px}
+.orn{color:var(--gold);letter-spacing:.6em;font-size:14px}
+section{padding:46px 0}
+h2{font-size:34px;text-align:center;margin-bottom:6px}
+.sub{text-align:center;color:var(--mut);margin:0 0 22px}
+.chips{display:flex;gap:8px;overflow-x:auto;padding:4px 2px 14px}
+@media(min-width:760px){.chips{flex-wrap:wrap;justify-content:center;overflow:visible}}
+.chip{flex:none;border:1px solid var(--silver);background:#fff;color:var(--ink);padding:8px 16px;border-radius:99px;font:400 14px Jost,sans-serif;cursor:pointer}
+.chip.on{background:var(--rose3);border-color:var(--rose3);color:#3d2a33}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:16px}
+.card{background:#fff;border:1px solid var(--silver2);border-radius:20px;padding:20px;display:flex;flex-direction:column;gap:8px;box-shadow:0 6px 20px rgba(217,138,163,.14)}
+.av{width:54px;height:54px;border-radius:50%;background:linear-gradient(135deg,var(--silver),var(--rose2));display:grid;place-items:center;font:700 25px 'Cormorant Garamond',serif;color:#4a3a43}
+.card h3{font-size:23px}
+.tag{font-size:12px;color:var(--rose4);letter-spacing:.08em;text-transform:uppercase}
+.card p{margin:0;color:var(--mut);font-size:14px;flex:1}
+.ok{align-self:flex-start;font-size:12px;background:var(--silver2);border:1px solid var(--silver);border-radius:99px;padding:3px 10px}
+.off{background:linear-gradient(135deg,#fdeaf0,#f6cfdb);border-radius:12px;padding:8px 12px;font-size:13px;color:#5a2d3e}
+.card a.wa{align-self:flex-start;font-size:14px;padding:9px 16px;border-radius:99px;border:1px solid var(--rose3);color:var(--ink);text-decoration:none;background:#fff}
+.empty{text-align:center;color:var(--mut);padding:30px 0}
+.trio{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:16px}
+.trio div{background:#fff;border:1px solid var(--silver2);border-radius:20px;padding:22px;text-align:center}
+.trio b{font:600 36px 'Cormorant Garamond',serif;color:var(--rose4)}
+.trio h3{font-size:21px;margin:4px 0}.trio p{margin:0;color:var(--mut);font-size:14px}
+.promesse{background:linear-gradient(rgba(252,245,243,.78),rgba(252,245,243,.86)),url(roses.jpg) center/cover}
+.pro{background:linear-gradient(180deg,#fff,var(--rose2));position:relative;overflow:hidden}
+.pro ul{list-style:none;padding:0;margin:0 auto 22px;max-width:520px;display:grid;gap:10px}
+.pro li{background:#ffffffcc;border:1px solid var(--silver2);border-radius:14px;padding:12px 16px}
+.pro li:before{content:'✿ ';color:var(--rose4)}
+.ctr{text-align:center}
+footer{text-align:center;color:var(--mut);padding:30px 0 90px;font-size:14px}
+#mus{position:fixed;right:16px;bottom:16px;z-index:9;border:1px solid var(--silver);background:#fff;color:var(--ink);border-radius:99px;padding:11px 16px;font:500 14px Jost,sans-serif;box-shadow:0 4px 16px rgba(217,138,163,.3);cursor:pointer}
+</style>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute"><defs><radialGradient id="gp" cx="50%" cy="95%" r="95%"><stop offset="0" stop-color="#e3a9a8"/><stop offset=".55" stop-color="#f6d3d3"/><stop offset="1" stop-color="#fff4f1"/></radialGradient><radialGradient id="gw" cx="50%" cy="95%" r="95%"><stop offset="0" stop-color="#f1ddd2"/><stop offset=".55" stop-color="#fffaf6"/><stop offset="1" stop-color="#ffffff"/></radialGradient><linearGradient id="gg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#f0d9a0"/><stop offset=".5" stop-color="#c9a66b"/><stop offset="1" stop-color="#e8cf98"/></linearGradient><symbol id="rose" viewBox="-60 -60 120 120"><g fill="url(#gp)" stroke="#d8b878" stroke-width=".6" stroke-opacity=".75"><path d="M0 0 C-19 -14 -17 -42 0 -48 C17 -42 19 -14 0 0Z" transform="rotate(0.0) scale(1.12)"/><path d="M0 0 C-19 -14 -17 -42 0 -48 C17 -42 19 -14 0 0Z" transform="rotate(45.0) scale(1.12)"/><path d="M0 0 C-19 -14 -17 -42 0 -48 C17 -42 19 -14 0 0Z" transform="rotate(90.0) scale(1.12)"/><path d="M0 0 C-19 -14 -17 -42 0 -48 C17 -42 19 -14 0 0Z" transform="rotate(135.0) scale(1.12)"/><path d="M0 0 C-19 -14 -17 -42 0 -48 C17 -42 19 -14 0 0Z" transform="rotate(180.0) scale(1.12)"/><path d="M0 0 C-19 -14 -17 -42 0 -48 C17 -42 19 -14 0 0Z" transform="rotate(225.0) scale(1.12)"/><path d="M0 0 C-19 -14 -17 -42 0 -48 C17 -42 19 -14 0 0Z" transform="rotate(270.0) scale(1.12)"/><path d="M0 0 C-19 -14 -17 -42 0 -48 C17 -42 19 -14 0 0Z" transform="rotate(315.0) scale(1.12)"/><path d="M0 0 C-19 -14 -17 -42 0 -48 C17 -42 19 -14 0 0Z" transform="rotate(20.0) scale(0.86)"/><path d="M0 0 C-19 -14 -17 -42 0 -48 C17 -42 19 -14 0 0Z" transform="rotate(71.4) scale(0.86)"/><path d="M0 0 C-19 -14 -17 -42 0 -48 C17 -42 19 -14 0 0Z" transform="rotate(122.9) scale(0.86)"/><path d="M0 0 C-19 -14 -17 -42 0 -48 C17 -42 19 -14 0 0Z" transform="rotate(174.3) scale(0.86)"/><path d="M0 0 C-19 -14 -17 -42 0 -48 C17 -42 19 -14 0 0Z" transform="rotate(225.7) scale(0.86)"/><path d="M0 0 C-19 -14 -17 -42 0 -48 C17 -42 19 -14 0 0Z" transform="rotate(277.1) scale(0.86)"/><path d="M0 0 C-19 -14 -17 -42 0 -48 C17 -42 19 -14 0 0Z" transform="rotate(328.6) scale(0.86)"/><path d="M0 0 C-19 -14 -17 -42 0 -48 C17 -42 19 -14 0 0Z" transform="rotate(35.0) scale(0.62)"/><path d="M0 0 C-19 -14 -17 -42 0 -48 C17 -42 19 -14 0 0Z" transform="rotate(95.0) scale(0.62)"/><path d="M0 0 C-19 -14 -17 -42 0 -48 C17 -42 19 -14 0 0Z" transform="rotate(155.0) scale(0.62)"/><path d="M0 0 C-19 -14 -17 -42 0 -48 C17 -42 19 -14 0 0Z" transform="rotate(215.0) scale(0.62)"/><path d="M0 0 C-19 -14 -17 -42 0 -48 C17 -42 19 -14 0 0Z" transform="rotate(275.0) scale(0.62)"/><path d="M0 0 C-19 -14 -17 -42 0 -48 C17 -42 19 -14 0 0Z" transform="rotate(335.0) scale(0.62)"/><path d="M0 0 C-19 -14 -17 -42 0 -48 C17 -42 19 -14 0 0Z" transform="rotate(10.0) scale(0.38)"/><path d="M0 0 C-19 -14 -17 -42 0 -48 C17 -42 19 -14 0 0Z" transform="rotate(82.0) scale(0.38)"/><path d="M0 0 C-19 -14 -17 -42 0 -48 C17 -42 19 -14 0 0Z" transform="rotate(154.0) scale(0.38)"/><path d="M0 0 C-19 -14 -17 -42 0 -48 C17 -42 19 -14 0 0Z" transform="rotate(226.0) scale(0.38)"/><path d="M0 0 C-19 -14 -17 -42 0 -48 C17 -42 19 -14 0 0Z" transform="rotate(298.0) scale(0.38)"/></g><circle r="4.5" fill="#e6c98f"/><circle cx="2" cy="-2" r="1.3" fill="#fff6dc"/></symbol><symbol id="rosew" viewBox="-60 -60 120 120"><g fill="url(#gw)" stroke="#d8b878" stroke-width=".6" stroke-opacity=".75"><path d="M0 0 C-19 -14 -17 -42 0 -48 C17 -42 19 -14 0 0Z" transform="rotate(0.0) scale(1.12)"/><path d="M0 0 C-19 -14 -17 -42 0 -48 C17 -42 19 -14 0 0Z" transform="rotate(45.0) scale(1.12)"/><path d="M0 0 C-19 -14 -17 -42 0 -48 C17 -42 19 -14 0 0Z" transform="rotate(90.0) scale(1.12)"/><path d="M0 0 C-19 -14 -17 -42 0 -48 C17 -42 19 -14 0 0Z" transform="rotate(135.0) scale(1.12)"/><path d="M0 0 C-19 -14 -17 -42 0 -48 C17 -42 19 -14 0 0Z" transform="rotate(180.0) scale(1.12)"/><path d="M0 0 C-19 -14 -17 -42 0 -48 C17 -42 19 -14 0 0Z" transform="rotate(225.0) scale(1.12)"/><path d="M0 0 C-19 -14 -17 -42 0 -48 C17 -42 19 -14 0 0Z" transform="rotate(270.0) scale(1.12)"/><path d="M0 0 C-19 -14 -17 -42 0 -48 C17 -42 19 -14 0 0Z" transform="rotate(315.0) scale(1.12)"/><path d="M0 0 C-19 -14 -17 -42 0 -48 C17 -42 19 -14 0 0Z" transform="rotate(20.0) scale(0.86)"/><path d="M0 0 C-19 -14 -17 -42 0 -48 C17 -42 19 -14 0 0Z" transform="rotate(71.4) scale(0.86)"/><path d="M0 0 C-19 -14 -17 -42 0 -48 C17 -42 19 -14 0 0Z" transform="rotate(122.9) scale(0.86)"/><path d="M0 0 C-19 -14 -17 -42 0 -48 C17 -42 19 -14 0 0Z" transform="rotate(174.3) scale(0.86)"/><path d="M0 0 C-19 -14 -17 -42 0 -48 C17 -42 19 -14 0 0Z" transform="rotate(225.7) scale(0.86)"/><path d="M0 0 C-19 -14 -17 -42 0 -48 C17 -42 19 -14 0 0Z" transform="rotate(277.1) scale(0.86)"/><path d="M0 0 C-19 -14 -17 -42 0 -48 C17 -42 19 -14 0 0Z" transform="rotate(328.6) scale(0.86)"/><path d="M0 0 C-19 -14 -17 -42 0 -48 C17 -42 19 -14 0 0Z" transform="rotate(35.0) scale(0.62)"/><path d="M0 0 C-19 -14 -17 -42 0 -48 C17 -42 19 -14 0 0Z" transform="rotate(95.0) scale(0.62)"/><path d="M0 0 C-19 -14 -17 -42 0 -48 C17 -42 19 -14 0 0Z" transform="rotate(155.0) scale(0.62)"/><path d="M0 0 C-19 -14 -17 -42 0 -48 C17 -42 19 -14 0 0Z" transform="rotate(215.0) scale(0.62)"/><path d="M0 0 C-19 -14 -17 -42 0 -48 C17 -42 19 -14 0 0Z" transform="rotate(275.0) scale(0.62)"/><path d="M0 0 C-19 -14 -17 -42 0 -48 C17 -42 19 -14 0 0Z" transform="rotate(335.0) scale(0.62)"/><path d="M0 0 C-19 -14 -17 -42 0 -48 C17 -42 19 -14 0 0Z" transform="rotate(10.0) scale(0.38)"/><path d="M0 0 C-19 -14 -17 -42 0 -48 C17 -42 19 -14 0 0Z" transform="rotate(82.0) scale(0.38)"/><path d="M0 0 C-19 -14 -17 -42 0 -48 C17 -42 19 -14 0 0Z" transform="rotate(154.0) scale(0.38)"/><path d="M0 0 C-19 -14 -17 -42 0 -48 C17 -42 19 -14 0 0Z" transform="rotate(226.0) scale(0.38)"/><path d="M0 0 C-19 -14 -17 -42 0 -48 C17 -42 19 -14 0 0Z" transform="rotate(298.0) scale(0.38)"/></g><circle r="4.5" fill="#e6c98f"/><circle cx="2" cy="-2" r="1.3" fill="#fff6dc"/></symbol><symbol id="sprig" viewBox="-60 -40 120 80"><path d="M-52 22 C-22 12 12 -8 52 -32" stroke="url(#gg)" stroke-width="2" fill="none" stroke-linecap="round"/><ellipse cx="-38" cy="16" rx="11" ry="4.2" transform="rotate(-35 -38 16) translate(0 -6)" fill="url(#gg)" opacity=".95"/><ellipse cx="-18" cy="9" rx="11" ry="4.2" transform="rotate(20 -18 9) translate(0 6)" fill="url(#gg)" opacity=".95"/><ellipse cx="2" cy="0" rx="11" ry="4.2" transform="rotate(-30 2 0) translate(0 -6)" fill="url(#gg)" opacity=".95"/><ellipse cx="22" cy="-12" rx="11" ry="4.2" transform="rotate(25 22 -12) translate(0 6)" fill="url(#gg)" opacity=".95"/><ellipse cx="40" cy="-23" rx="11" ry="4.2" transform="rotate(-25 40 -23) translate(0 -6)" fill="url(#gg)" opacity=".95"/><circle cx="-26" cy="2" r="4.2" fill="#fffaf7" stroke="#d8b878" stroke-width=".7"/><circle cx="-26" cy="2" r="1.4" fill="#e6c98f"/><circle cx="12" cy="-10" r="4.2" fill="#fffaf7" stroke="#d8b878" stroke-width=".7"/><circle cx="12" cy="-10" r="1.4" fill="#e6c98f"/><circle cx="46" cy="-30" r="4.2" fill="#fffaf7" stroke="#d8b878" stroke-width=".7"/><circle cx="46" cy="-30" r="1.4" fill="#e6c98f"/><circle cx="-8" cy="-8" r="1.8" fill="#e6c98f"/><circle cx="30" cy="-24" r="1.8" fill="#e6c98f"/><circle cx="-44" cy="10" r="1.8" fill="#e6c98f"/></symbol></defs></svg>
+
+<header class="hero">
+<svg class="fb" viewBox="0 0 120 120" style="left:-9vw;bottom:-8vw;width:34vw;transform:rotate(15deg)"><use href="#rose"/></svg><svg class="fb" viewBox="0 0 120 120" style="right:-9vw;bottom:-8vw;width:32vw;transform:rotate(-20deg)"><use href="#rosew"/></svg><svg class="fb" viewBox="0 0 120 80" style="left:19vw;bottom:4px;width:28vw"><use href="#sprig"/></svg><svg class="fb" viewBox="0 0 120 80" style="right:19vw;bottom:4px;width:28vw;transform:scaleX(-1)"><use href="#sprig"/></svg>
+<div class="wrap">
+<nav><span class="logo sv">ZAFFA</span><a class="btn alt" href="#prestataires">Découvrir</a></nav>
+<div class="garland"><svg class="gi" viewBox="0 0 120 80" style="width:78px;height:52px"><use href="#sprig"/></svg><svg class="gi" viewBox="0 0 120 120" style="width:60px;height:60px"><use href="#rose"/></svg><svg class="gi" viewBox="0 0 120 120" style="width:74px;height:74px"><use href="#rosew"/></svg><svg class="gi" viewBox="0 0 120 120" style="width:60px;height:60px"><use href="#rose"/></svg><svg class="gi" viewBox="0 0 120 80" style="width:78px;height:52px;transform:scaleX(-1)"><use href="#sprig"/></svg></div>
+<h1>Votre mariage,<br><span class="sv">sans courir partout</span></h1>
+<p>Salles, traiteurs, photographes, tenues… retrouvez les meilleurs prestataires de mariage en Algérie, au même endroit.</p>
+<a class="btn" href="#prestataires">Trouver mes prestataires</a>
+</div></header>
+
+<section id="prestataires"><div class="wrap">
+<h2>Nos prestataires</h2>
+<p class="sub">Tous sont partenaires Zaffa ✓</p>
+<div class="chips" id="chips"></div>
+<div class="grid" id="grid"></div>
+</div></section>
+
+<section class="promesse"><div class="wrap">
+<h2>La promesse Zaffa</h2><p class="sub">Pensé pour les futures mariées</p>
+<div class="trio">
+<div><b>1</b><h3>Prestataires choisis</h3><p>Chaque partenaire s'engage à répondre vite et à annoncer ses prix clairement.</p></div>
+<div><b>2</b><h3>Offres exclusives</h3><p>Des avantages réservés aux mariées Zaffa. Dites « Zaffa » en les contactant.</p></div>
+<div><b>3</b><h3>Contact direct</h3><p>Un clic sur WhatsApp, sans intermédiaire.</p></div>
+</div></div></section>
+
+<section class="pro">
+<svg class="fb" viewBox="0 0 120 120" style="width:170px;left:-60px;top:-40px"><use href="#rosew"/></svg><svg class="fb" viewBox="0 0 120 120" style="width:140px;right:-45px;bottom:-30px;transform:rotate(40deg)"><use href="#rose"/></svg>
+<div class="wrap">
+<h2>Vous êtes prestataire ?</h2><p class="sub">Rejoignez Zaffa, les mariées vous trouvent</p>
+<ul>
+<li>Votre page sur Zaffa, gratuite pendant le lancement</li>
+<li>Le badge « Partenaire Zaffa ✓ » qui rassure les clientes</li>
+<li>Votre « Offre exclusive Zaffa » mise en avant sur votre fiche</li>
+<li>Des clientes qui vous écrivent directement sur WhatsApp</li>
+</ul>
+<div class="ctr"><a class="btn" id="join" href="#" style="display:none">Devenir partenaire</a></div>
+</div></section>
+
+<footer><span class="sv" style="font-family:'Cormorant Garamond',serif;font-size:22px;letter-spacing:.14em">ZAFFA</span><br>Plateforme de prestataires de mariage · Béjaïa, Algérie</footer>
+<button id="mus" aria-label="Musique">♪ Musique</button>
+
+<script>
+const WA='';/* numéro WhatsApp de Zaffa, ex: 213555123456 */
+const D={cats:["Salles des fêtes","Traiteurs","Pâtisserie","Photo & Vidéo","Robes & Tenues","Coiffure & Maquillage","Décoration & Musique","Enfants","Sécurité"],items:[]};
+let cur='Toutes';
+const $=i=>document.getElementById(i);
+function el(t,c,x){const e=document.createElement(t);if(c)e.className=c;if(x!=null)e.textContent=x;return e}
+function render(){
+  const ch=$('chips');ch.innerHTML='';
+  ['Toutes',...D.cats].forEach(c=>{const b=el('button','chip'+(c===cur?' on':''),c);b.onclick=()=>{cur=c;render()};ch.appendChild(b)});
+  const g=$('grid');g.innerHTML='';
+  const l=D.items.filter(i=>cur==='Toutes'||i.cat===cur);
+  if(!l.length){g.appendChild(el('div','empty','Bientôt des prestataires dans cette catégorie ✿'));return}
+  l.forEach(i=>{const c=el('div','card');
+    c.appendChild(el('div','av',i.nom.charAt(0).toUpperCase()));
+    c.appendChild(el('div','tag',i.cat+' · '+i.ville));
+    c.appendChild(el('h3',null,i.nom));
+    c.appendChild(el('span','ok','✓ Partenaire Zaffa'));
+    c.appendChild(el('p',null,i.desc));
+    if(i.offre)c.appendChild(el('div','off','🎁 Offre Zaffa : '+i.offre));
+    const n=(i.tel||'').replace(/\D/g,'').replace(/^0/,'213');
+    if(n){const a=el('a','wa','Contacter sur WhatsApp');a.href='https://wa.me/'+n+'?text='+encodeURIComponent('Bonjour, je vous contacte via Zaffa ✿');a.target='_blank';a.rel='noopener';c.appendChild(a)}
+    g.appendChild(c)});
+}
+if(WA){const j=$('join');j.style.display='inline-block';j.href='https://wa.me/'+WA+'?text='+encodeURIComponent('Bonjour Zaffa, je souhaite devenir prestataire partenaire.');j.target='_blank'}
+fetch('prestataires.json?v='+Date.now()).then(r=>r.json()).then(j=>{if(Array.isArray(j)){D.items=j;render()}}).catch(()=>{});
+render();
+
+/* Musique romantique rythmée (générée) — ou ton fichier musique.mp3 s'il existe */
+let ac,mg,on=false,tm,mode='',aud,step=0,nt=0,noiseB;
+const SP=60/96/2;
+const PR=[[110,[220,261.63,329.63,440]],[87.31,[174.61,220,261.63,349.23]],[130.81,[261.63,329.63,392,523.25]],[98,[196,246.94,293.66,392]]];
+const PAT=[0,2,1,3,2,3,1,2];
+function osc(ty,f,t,d,v){const o=ac.createOscillator(),g=ac.createGain();o.type=ty;o.frequency.value=f;g.gain.setValueAtTime(.0001,t);g.gain.linearRampToValueAtTime(v,t+.01);g.gain.exponentialRampToValueAtTime(.0001,t+d);o.connect(g);g.connect(mg);o.start(t);o.stop(t+d+.05)}
+function kick(t){const o=ac.createOscillator(),g=ac.createGain();o.frequency.setValueAtTime(140,t);o.frequency.exponentialRampToValueAtTime(45,t+.15);g.gain.setValueAtTime(.5,t);g.gain.exponentialRampToValueAtTime(.001,t+.25);o.connect(g);g.connect(mg);o.start(t);o.stop(t+.3)}
+function hat(t){const s=ac.createBufferSource();s.buffer=noiseB;const f=ac.createBiquadFilter();f.type='highpass';f.frequency.value=7000;const g=ac.createGain();g.gain.setValueAtTime(.12,t);g.gain.exponentialRampToValueAtTime(.001,t+.06);s.connect(f);f.connect(g);g.connect(mg);s.start(t);s.stop(t+.08)}
+function sched(){while(nt<ac.currentTime+.4){const s=step%8,b=Math.floor(step/8)%4,bs=PR[b][0],ar=PR[b][1];
+  if(s===0)ar.forEach(f=>osc('sine',f/2,nt,SP*8,.05));
+  if(s===0||s===4)kick(nt);
+  if(s===0||s===3||s===4)osc('sine',bs,nt,SP*2.5,.22);
+  if(s%2===1)hat(nt);
+  osc('triangle',ar[PAT[s]]*(s===6?2:1),nt,.7,.16);
+  nt+=SP;step++}}
+function startSynth(){
+  if(!ac){ac=new (window.AudioContext||window.webkitAudioContext)();mg=ac.createGain();mg.gain.value=.9;
+    const d=ac.createDelay();d.delayTime.value=.31;const fb=ac.createGain();fb.gain.value=.3;
+    mg.connect(ac.destination);mg.connect(d);d.connect(fb);fb.connect(d);d.connect(ac.destination);
+    noiseB=ac.createBuffer(1,ac.sampleRate*.1,ac.sampleRate);const dd=noiseB.getChannelData(0);for(let i=0;i<dd.length;i++)dd[i]=Math.random()*2-1}
+  ac.resume();nt=ac.currentTime+.1;step=0;tm=setInterval(sched,100);mode='synth'}
+$('mus').onclick=()=>{
+  if(on){if(mode==='file')aud.pause();else{clearInterval(tm);ac.suspend()}on=false;$('mus').textContent='♪ Musique';return}
+  on=true;$('mus').textContent='♪ Pause';
+  if(mode==='synth'){ac.resume();nt=ac.currentTime+.1;tm=setInterval(sched,100);return}
+  if(mode==='file'){aud.play();return}
+  aud=new Audio('musique.mp3');aud.loop=true;aud.volume=.7;
+  aud.play().then(()=>{mode='file'}).catch(()=>startSynth());
+};
+</script>
+</body>
+</html>

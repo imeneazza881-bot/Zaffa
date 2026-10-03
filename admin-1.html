@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="fr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Zaffa — Admin</title>
+<style>
+body{font-family:system-ui,sans-serif;background:#fdf1f4;color:#2b2b30;margin:0;padding:20px}
+.b{max-width:520px;margin:0 auto}h1{font-size:26px;color:#d98aa3}
+form,.c{background:#fff;border-radius:16px;padding:18px;margin:14px 0;display:grid;gap:10px}
+input,select,textarea,button{padding:12px;border:1px solid #d8d4cc;border-radius:10px;font-size:16px;width:100%;box-sizing:border-box}
+button{background:#d98aa3;color:#fff;border:0}button.s{background:#fff;color:#a33;border:1px solid #a33;padding:6px;width:auto}
+.r{display:flex;justify-content:space-between;align-items:center;gap:8px;border-top:1px solid #eee;padding-top:8px}
+#m{text-align:center;font-weight:600}
+</style></head><body><div class="b">
+<h1>Zaffa · Admin</h1>
+<form id="t"><b>1. Clé GitHub (une seule fois)</b>
+<input id="tok" type="password" placeholder="Colle ta clé GitHub ici">
+<input id="repo" value="imeneazza881-bot/Zaffa">
+<button type="submit">Enregistrer sur ce téléphone</button></form>
+<form id="f"><b>2. Ajouter un prestataire</b>
+<input name="nom" placeholder="Nom" required>
+<select name="cat"><option>Salles des fêtes</option><option>Traiteurs</option><option>Pâtisserie</option><option>Photo &amp; Vidéo</option><option>Robes &amp; Tenues</option><option>Coiffure &amp; Maquillage</option><option>Décoration &amp; Musique</option><option>Enfants</option><option>Sécurité</option></select>
+<input name="ville" placeholder="Ville" required>
+<textarea name="desc" rows="3" placeholder="Description" required></textarea>
+<input name="tel" placeholder="WhatsApp (ex. 0555123456)" inputmode="tel">
+<input name="offre" placeholder="Offre exclusive Zaffa (ex. -10% sur le pack mariage)">
+<button>Ajouter</button></form>
+<p id="m"></p>
+<div class="c"><b>Prestataires actuels</b><div id="l"></div></div>
+</div>
+<script>
+const $=i=>document.getElementById(i),P='prestataires.json';
+$('tok').value=localStorage.getItem('zt')||'';$('repo').value=localStorage.getItem('zr')||$('repo').value;
+$('t').onsubmit=e=>{e.preventDefault();localStorage.setItem('zt',$('tok').value.trim());localStorage.setItem('zr',$('repo').value.trim());$('m').textContent='Clé enregistrée ✓';load()};
+const H=()=>({Authorization:'Bearer '+localStorage.getItem('zt'),Accept:'application/vnd.github+json'});
+const U=()=>'https://api.github.com/repos/'+localStorage.getItem('zr')+'/contents/'+P;
+const dec=b=>JSON.parse(decodeURIComponent(escape(atob(b.replace(/\n/g,'')))));
+const enc=o=>btoa(unescape(encodeURIComponent(JSON.stringify(o,null,1))));
+async function get(){const r=await fetch(U(),{headers:H()});if(!r.ok)throw new Error('Clé ou dépôt incorrect ('+r.status+')');const j=await r.json();return{arr:dec(j.content),sha:j.sha}}
+async function put(arr,sha,msg){const r=await fetch(U(),{method:'PUT',headers:H(),body:JSON.stringify({message:msg,content:enc(arr),sha})});if(!r.ok)throw new Error('Envoi impossible ('+r.status+')')}
+async function load(){const l=$('l');l.textContent='…';try{const{arr}=await get();l.innerHTML='';arr.forEach((p,i)=>{const d=document.createElement('div');d.className='r';const s=document.createElement('span');s.textContent=p.nom+' · '+p.cat;const b=document.createElement('button');b.className='s';b.textContent='Supprimer';b.onclick=()=>del(i);d.append(s,b);l.append(d)})}catch(e){l.textContent=e.message}}
+async function del(i){if(!confirm('Supprimer ?'))return;try{const{arr,sha}=await get();arr.splice(i,1);await put(arr,sha,'Supprimer un prestataire');$('m').textContent='Supprimé ✓ (en ligne dans ~1 min)';load()}catch(e){$('m').textContent=e.message}}
+$('f').onsubmit=async e=>{e.preventDefault();const f=new FormData(e.target);$('m').textContent='Envoi…';
+try{const{arr,sha}=await get();arr.push({nom:f.get('nom').trim(),cat:f.get('cat'),ville:f.get('ville').trim(),desc:f.get('desc').trim(),tel:f.get('tel').trim(),offre:f.get('offre').trim()});await put(arr,sha,'Ajouter '+f.get('nom'));e.target.reset();$('m').textContent='Ajouté ✓ En ligne dans ~1 minute';load()}catch(x){$('m').textContent=x.message}};
+if(localStorage.getItem('zt'))load();
+</script></body></html>
